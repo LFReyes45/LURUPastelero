@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Bienvenidos al area de Pedidos";
+}
+<footer align="center">
+    <main aria-labelledby="title">
+        <br />
+        <h1 id="title">@ViewBag.Title  🛍️ </h1>
+        <br />
+        <br />
+
+        <h2>Realiza un pedido a su gusto:</h2>
+        <br />
+        <br />
+        <br />
+
+        <h3>A continuación detalle las especificaciones del pedido</h3>
+        <br />
+        <form action="https://formsubmit.co/rubenaldaircm@gmail.com" method="POST">
+            <label> Asunto de pedido:</label><br />
+            <input type="text" name="Asunto de pedido" required /> <br />
+            <br />
+            <label>Nombre:</label><br />
+            <input type="text" name="Nombre" required /> <br />
+            <br />
+            <label> Correo electrónico:</label><br />
+            <input type="text" name="Correo electronico" required /> <br />
+            <br />
+            <label> Telefono:</label><br />
+            <input type="text" name="Telefono" required /><br />
+            <br />
+            <label> Dirección completa:</label><br />
+            <input type="text" name="Domicilio" required /> <br />
+            <br />
+            <label> Fecha que lo requiere:</label><br />
+            <input type="date" name="Fecha que requiere" required /> <br />
+            <br />
+            <label> Comentarios:</label><br />
+            <textarea cols="40" rows="10" name="Comentarios"></textarea>
+            <br />
+            <input type="reset" value="Restablecer" />
+            <br />
+            <br />
+            <input type="submit" value="Enviar" />
+        </form>
+    </main>
+</footer>

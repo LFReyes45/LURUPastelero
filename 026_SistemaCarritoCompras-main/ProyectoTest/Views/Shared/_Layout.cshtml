@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/PluginsCSS")
+    <link rel="shortcut icon" href="~/Content/logo1.png" />
+    <link rel="stylesheet" href="~/Content/estilos.css" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="~/Content/images/fevicon.png" type="image/gif" />
+    <!-- font css -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/Content/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/js/jquery-3.0.0.min.js"></script>
+    <script src="~/Content/js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="~/Content/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Content/js/custom.js"></script>
+
+
+</head>
+<body class="sb-nav-fixed">
+    
+
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #f8a997 ">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="#">LURU Pastelero</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    @{ if (Session["Usuario"] == null)
+                        {
+            <li><a class="dropdown-item" href="@Url.Action("IniciarSesion","Tienda")">Iniciar Sesión</a></li> }
+                        else
+                        {
+            <li><a class="dropdown-item" href="@Url.Action("CerrarSesion","Tienda")">Cerrar Sesion</a></li> } }
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu" style="background-color:#2e4863">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Resumen</div>
+                        @{ bool Administrador = true; }
+                        @{ if (((ProyectoTest.Models.Usuario)Session["Usuario"]) != null)
+                            {
+                                if (((ProyectoTest.Models.Usuario)Session["Usuario"]).EsAdministrador == false)
+                                {
+                                    Administrador = ((ProyectoTest.Models.Usuario)Session["Usuario"]).EsAdministrador;
+                                }
+                            } }
+
+                        <a class="nav-link" href="@Url.Action("Index","Home", new {Administrador = Administrador})">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Inicio
+                        </a>
+
+
+                        @if (ViewBag.MostrarPestañas == true)
+                        {
+            <div class="sb-sidenav-menu-heading">Gestion</div>
+                            <a class="nav-link" href="@Url.Action("Categoria","Home")" target="_blank">
+                                <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Categorias
+                            </a>
+
+                                            <a class="nav-link" href="@Url.Action("Marca","Home")" target="_blank">
+                                                <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Marcas
+                                            </a>
+
+                                                            <a class="nav-link" href="@Url.Action("Producto","Home")" target="_blank">
+                                                                <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Productos
+                                                            </a>}
+                        <div class="sb-sidenav-menu-heading">Usuarios</div>
+                        <a class="nav-link" href="@Url.Action("About","Home")" target="_blank">
+                            <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Acerca de
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Contact","Home")" target="_blank">
+                            <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Realiza pedido
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Preguntasfrecuentes","Home")" target="_blank">
+                            <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Preguntas frecuentes
+                        </a>
+                        @{ if (Session["Usuario"] == null)
+                            {
+                <a class="nav-link" href="@Url.Action("Tienda","Home")" target="_blank">
+                    <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Ver Catálogo
+                </a> }
+            else
+            {
+<a class="nav-link" href="@Url.Action("Index","Tienda")" target="_blank">
+    <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>Ver Catálogo
+</a> } }
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container body-content">
+
+
+            @RenderBody()
+            <hr />
+            <footer align="center">
+                <div>
+                    <p style="text-align: center; font-weight: 500;">Sigue nuestro rastro de dulzura en: </p>
+                </div>
+
+
+                <div>
+                    <a title="Instagram" href="https://www.instagram.com/lurupastelero/"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" width="35" alt="Insta" /></a>
+                    <a title="Facebook" href="https://www.facebook.com/profile.php?id=100092337979635"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="35" alt="Face" /></a>
+                    <a title="Twitter" href="https://twitter.com/LURUPastelero"><img src="https://e7.pngegg.com/pngimages/617/28/png-clipart-twitter-logo-blue-sky-wing-beak-font-twitter-blue-social-media.png" width="35" alt="Twi" /></a>
+                </div>
+                <br />
+                <br />
+                <p>&copy; @DateTime.Now.Year- LURU Pastelero 🛒🎂. Todos los derechos reservados. Tienda creada por Comercio LURU S.A. de C.V.</p>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/PluginsJS")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                //     document.body.classList.toggle('sb-sidenav-toggled');
+                // }
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
+
+        });
+
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
